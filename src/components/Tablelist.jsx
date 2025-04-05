@@ -1,35 +1,43 @@
 import React, { useState, useEffect } from "react";
 
+const API_URL = "http://localhost:3001/api/tasks";
+
 const Tablelist = () => {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [editingId, setEditingId] = useState(null);
 
+  const fetchTasks = async () => {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    setTasks(data);
+  };
+
   useEffect(() => {
-    setTasks([
-      { id: 1, title: "Terminar la tarea", completed: false },
-      { id: 2, title: "Estudiar Tanstack", completed: true },
-    ]);
+    fetchTasks();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title.trim()) return;
 
     if (editingId !== null) {
-      setTasks((prev) =>
-        prev.map((task) => (task.id === editingId ? { ...task, title } : task))
-      );
+      await fetch(`${API_URL}/${editingId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, completed: false }),
+      });
       setEditingId(null);
     } else {
-      const newTask = {
-        id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
-        title,
-        completed: false,
-      };
-      setTasks((prev) => [...prev, newTask]);
+      await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, completed: false }),
+      });
     }
+
     setTitle("");
+    fetchTasks();
   };
 
   const handleEdit = (task) => {
@@ -37,16 +45,21 @@ const Tablelist = () => {
     setEditingId(task.id);
   };
 
-  const handleDelete = (id) => {
-    setTasks((prev) => prev.filter((task) => task.id !== id));
+  const handleDelete = async (id) => {
+    await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+    fetchTasks();
   };
 
-  const toggleComplete = (id) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+  const toggleComplete = async (id) => {
+    const task = tasks.find((t) => t.id === id);
+    await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: task.title, completed: !task.completed }),
+    });
+    fetchTasks();
   };
 
   return (
