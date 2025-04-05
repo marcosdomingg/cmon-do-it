@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-  background: #fff;
+  background: #000;
+}
+
+td {
+  background: #212121;
 }

@@ -63,7 +63,7 @@ const Tablelist = () => {
   };
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
+    <div className="p-4 w-3/5 mx-auto">
       <h1 className="text-2xl font-bold mb-4">To-Do List</h1>
 
       <form onSubmit={handleSubmit} className="mb-4 flex gap-2">
@@ -72,41 +72,42 @@ const Tablelist = () => {
           value={title}
           placeholder="Nueva tarea..."
           onChange={(e) => setTitle(e.target.value)}
-          className="flex-1 border rounded p-2"
+          className="flex-1 border border-yellow-400 text-white rounded p-2 bg-transparent"
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-yellow-400 text-black font-bold px-4 py-2 rounded"
         >
           {editingId !== null ? "Actualizar" : "Agregar"}
         </button>
       </form>
 
-      <table className="w-full border border-gray-300">
+      <table className="w-full">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 border">ID</th>
-            <th className="p-2 border">Tarea</th>
-            <th className="p-2 border">Completada</th>
-            <th className="p-2 border">Acciones</th>
+          <tr className="bg-yellow-400">
+            <th className="p-2 ">ID</th>
+            <th className="p-2 ">Tarea</th>
+            <th className="p-2 ">Completada</th>
+            <th className="p-2 ">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {tasks.map((task) => (
-            <tr key={task.id} className="text-center">
-              <td className="p-2 border">{task.id}</td>
-              <td className="p-2 border">{task.title}</td>
-              <td className="p-2 border">
+            <tr key={task.id} className="text-center ">
+              <td className="p-2 text-white">{task.id}</td>
+              <td className="p-2 text-white">{task.title}</td>
+              <td className="p-2 ">
                 <input
+                  className="checked:text-yellow-40 after:checked: text-black"
                   type="checkbox"
                   checked={task.completed}
                   onChange={() => toggleComplete(task.id)}
                 />
               </td>
-              <td className="p-2 border space-x-2">
+              <td className="p-2 space-x-2">
                 <button
                   onClick={() => handleEdit(task)}
-                  className="text-blue-500"
+                  className="text-yellow-400"
                 >
                   ✏️
                 </button>
