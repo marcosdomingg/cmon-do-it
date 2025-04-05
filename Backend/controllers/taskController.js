@@ -1,13 +1,13 @@
-const db = require("../models/db");
+import db from "../models/db.js";
 
-exports.getAllTasks = (req, res) => {
+export const getAllTasks = (req, res) => {
   db.query("SELECT * FROM tasks", (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results);
   });
 };
 
-exports.createTask = (req, res) => {
+export const createTask = (req, res) => {
   const { title, completed } = req.body;
   db.query(
     "INSERT INTO tasks (title, completed) VALUES (?, ?)",
@@ -19,7 +19,7 @@ exports.createTask = (req, res) => {
   );
 };
 
-exports.updateTask = (req, res) => {
+export const updateTask = (req, res) => {
   const { id } = req.params;
   const { title, completed } = req.body;
   db.query(
@@ -32,7 +32,7 @@ exports.updateTask = (req, res) => {
   );
 };
 
-exports.deleteTask = (req, res) => {
+export const deleteTask = (req, res) => {
   const { id } = req.params;
   db.query("DELETE FROM tasks WHERE id = ?", [id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
