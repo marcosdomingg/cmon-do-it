@@ -155,12 +155,6 @@ Abre tu navegador en:
 
 ---
 
-## 📸 Capturas (opcional)
-
-> Puedes añadir aquí screenshots de tu aplicación funcionando.
-
----
-
 ## 📚 Recursos útiles
 
 - [Vite](https://vitejs.dev/)
