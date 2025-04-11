@@ -4,6 +4,11 @@ Una aplicación To-Do lista para producción, creada con **React (Vite)** en el 
 
 ---
 
+## VIDEO DE YOUTUBE HACIENDO PRUEBA UNITARIA DEL PROYECTO CON SELENIUM Y MOCH:
+
+(https://youtu.be/CgRwHGWhd3o)
+
+
 ## 🧱 Tecnologías utilizadas
 
 - **Frontend**: React 19 + Vite + TailwindCSS + Flowbite + Lucide
@@ -102,10 +107,10 @@ http://localhost:3001/api/tasks
 
 ## 💻 Configuración del Frontend (React + Vite)
 
-### 🔹 6. Ve a la carpeta `client` e instala dependencias
+### 🔹 6. Ve a la carpeta `delproyecto` e instala dependencias
 
 ```bash
-cd ../client
+cd ../delproyecto
 npm install
 ```
 
@@ -116,6 +121,13 @@ npm install
 ```bash
 npm run dev
 ```
+
+### 🔹 8. Inicia las pruebas unitarias desde la carpeta principal del proyecto
+
+```bash
+npm run test
+```
+
 
 Abre tu navegador en:  
 👉 http://localhost:5173
@@ -158,9 +170,28 @@ Abre tu navegador en:
 
 ---
 
-## 📸 Capturas
+## 🧪 Pruebas Unitarias Captura: (TAREA 4)
 
-### Vista general de la aplicación
+### Crear Tarea
+
+![Vista general](/screenshot_mocha/tarea-creada.png)
+
+### Tarea Completada
+
+![Tarea completadas](/screenshot_mocha/tarea-completada.png)
+
+### Tarea Eliminada
+
+![Tarea Eliminada](/screenshot_mocha/tarea-eliminada.png)
+
+### Buscar Tarea
+
+![Buscar Tarea](/screenshot_mocha/buscar-tarea.png)
+
+
+## 📸 Capturas Generales (TAREA 3)
+
+### Vista general de la aplicación 
 
 ![Vista general](/public/screenshots/VISTA-GENERAL.png)
 
