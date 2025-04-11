@@ -113,7 +113,7 @@ describe("To-Do List - Pruebas Automatizadas", function () {
     await driver.sleep(3000);
 
     await searchInput.clear();
-    await searchInput.sendKeys("buscaresta");
+    await searchInput.sendKeys("Buscar esta TAREA");
 
     await driver.sleep(1500);
 
