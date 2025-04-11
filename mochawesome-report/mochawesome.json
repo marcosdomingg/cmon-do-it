@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-04-11T03:33:17.595Z",
+    "end": "2025-04-11T03:33:35.391Z",
+    "duration": 17796,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c7b54758-aec8-426c-81ec-37ec49ec69fd",
+      "title": "",
+      "fullFile": "/Users/marcosdominguez/Desktop/cmon-todo-it/test/testTodo.js",
+      "file": "/test/testTodo.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "696a826e-374f-470b-89e0-0ec0d67de992",
+          "title": "To-Do List - Pruebas Automatizadas",
+          "fullFile": "/Users/marcosdominguez/Desktop/cmon-todo-it/test/testTodo.js",
+          "file": "/test/testTodo.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"To-Do List - Pruebas Automatizadas\"",
+              "fullTitle": "To-Do List - Pruebas Automatizadas \"before all\" hook in \"To-Do List - Pruebas Automatizadas\"",
+              "timedOut": false,
+              "duration": 726,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();",
+              "err": {},
+              "uuid": "6561bbf1-1554-47a6-80a9-d7e307496aae",
+              "parentUUID": "696a826e-374f-470b-89e0-0ec0d67de992",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"To-Do List - Pruebas Automatizadas\"",
+              "fullTitle": "To-Do List - Pruebas Automatizadas \"after all\" hook in \"To-Do List - Pruebas Automatizadas\"",
+              "timedOut": false,
+              "duration": 56,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "16da01b3-91b3-4a19-98a0-73b0ee85d844",
+              "parentUUID": "696a826e-374f-470b-89e0-0ec0d67de992",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Debe agregar una tarea y verificar que aparece en la tabla",
+              "fullTitle": "To-Do List - Pruebas Automatizadas Debe agregar una tarea y verificar que aparece en la tabla",
+              "timedOut": false,
+              "duration": 3455,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.get(\"http://localhost:5173\");\nconst testTitle = \"Tarea desde Selenium\";\nconst inputs = await driver.findElements(By.css('input[type=\"text\"]'));\nconst taskInput = inputs[1];\nawait taskInput.clear();\nawait taskInput.sendKeys(testTitle);\nconst addButton = await driver.findElement(By.id(\"button\"));\nawait addButton.click();\nawait driver.sleep(3000);\nconst bodyText = await driver.findElement(By.tagName(\"body\")).getText();\nassert.ok(bodyText.includes(testTitle), \"La tarea no apareció en la tabla\");\nawait takeScreenshot(driver, \"tarea-creada\");",
+              "err": {},
+              "uuid": "05bc1c60-b0c3-428f-a705-e8c17bc8d359",
+              "parentUUID": "696a826e-374f-470b-89e0-0ec0d67de992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe marcar una tarea como completada",
+              "fullTitle": "To-Do List - Pruebas Automatizadas Debe marcar una tarea como completada",
+              "timedOut": false,
+              "duration": 4177,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.get(\"http://localhost:5173\");\nconst testTitle = \"Tarea para completar\";\nconst inputs = await driver.findElements(By.css('input[type=\"text\"]'));\nconst taskInput = inputs[1];\nawait taskInput.clear();\nawait taskInput.sendKeys(testTitle);\nconst addButton = await driver.findElement(By.id(\"button\"));\nawait addButton.click();\nawait driver.sleep(3000);\nconst row = await driver.wait(\n  until.elementLocated(\n    By.xpath(`//tr[td[contains(text(), '${testTitle}')]]`)\n  ),\n  8000\n);\nconst checkbox = await row.findElement(By.css('input[type=\"checkbox\"]'));\nawait checkbox.click();\nawait driver.sleep(1000);\nawait takeScreenshot(driver, \"tarea-completada\");",
+              "err": {},
+              "uuid": "25db89f5-60f1-4d52-a9ea-04ccd8f78624",
+              "parentUUID": "696a826e-374f-470b-89e0-0ec0d67de992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe eliminar una tarea",
+              "fullTitle": "To-Do List - Pruebas Automatizadas Debe eliminar una tarea",
+              "timedOut": false,
+              "duration": 4674,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.get(\"http://localhost:5173\");\nconst testTitle = \"Tarea a eliminar\";\nconst inputs = await driver.findElements(By.css('input[type=\"text\"]'));\nconst taskInput = inputs[1];\nawait taskInput.clear();\nawait taskInput.sendKeys(testTitle);\nconst addButton = await driver.findElement(By.id(\"button\"));\nawait addButton.click();\nawait driver.sleep(3000);\nconst row = await driver.wait(\n  until.elementLocated(\n    By.xpath(`//tr[td[contains(text(), '${testTitle}')]]`)\n  ),\n  8000\n);\nconst buttons = await row.findElements(By.css(\"button\"));\nawait buttons[1].click();\nawait driver.sleep(1500);\nconst bodyText = await driver.findElement(By.tagName(\"body\")).getText();\nassert.ok(!bodyText.includes(testTitle), \"La tarea no fue eliminada\");\nawait takeScreenshot(driver, \"tarea-eliminada\");",
+              "err": {},
+              "uuid": "c50db2eb-13ab-4b84-8c36-b1a024e0b8f6",
+              "parentUUID": "696a826e-374f-470b-89e0-0ec0d67de992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe buscar una tarea por palabra clave",
+              "fullTitle": "To-Do List - Pruebas Automatizadas Debe buscar una tarea por palabra clave",
+              "timedOut": false,
+              "duration": 4704,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.get(\"http://localhost:5173\");\nconst testTitle = \"BuscarEstaTarea\";\nconst inputs = await driver.findElements(By.css('input[type=\"text\"]'));\nconst taskInput = inputs[1];\nconst searchInput = inputs[0];\nawait taskInput.clear();\nawait taskInput.sendKeys(testTitle);\nconst addButton = await driver.findElement(By.id(\"button\"));\nawait addButton.click();\nawait driver.sleep(3000);\nawait searchInput.clear();\nawait searchInput.sendKeys(\"buscaresta\");\nawait driver.sleep(1500);\nconst bodyText = await driver.findElement(By.tagName(\"body\")).getText();\nassert.ok(\n  bodyText.includes(testTitle),\n  \"No se encontró la tarea por búsqueda\"\n);\nawait takeScreenshot(driver, \"buscar-tarea\");",
+              "err": {},
+              "uuid": "58761800-4bf8-4cd4-bfd6-dacfd81783e8",
+              "parentUUID": "696a826e-374f-470b-89e0-0ec0d67de992",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "05bc1c60-b0c3-428f-a705-e8c17bc8d359",
+            "25db89f5-60f1-4d52-a9ea-04ccd8f78624",
+            "c50db2eb-13ab-4b84-8c36-b1a024e0b8f6",
+            "58761800-4bf8-4cd4-bfd6-dacfd81783e8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 17010,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 40000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.1.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
