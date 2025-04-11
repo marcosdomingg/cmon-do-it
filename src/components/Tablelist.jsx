@@ -6,10 +6,12 @@ const Tablelist = () => {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // ⬅️ Estado para búsqueda
 
   const fetchTasks = async () => {
     const res = await fetch(API_URL);
     const data = await res.json();
+    console.log("TAREAS ACTUALIZADAS:", data);
     setTasks(data);
   };
 
@@ -62,9 +64,21 @@ const Tablelist = () => {
     fetchTasks();
   };
 
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-4 w-3/5 mx-auto">
       <h1 className="text-2xl font-bold mb-4">To-Do List</h1>
+
+      <input
+        type="text"
+        placeholder="Buscar tarea..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full mb-4 p-2 border border-yellow-400 rounded bg-yellow-400 placeholder:text-black  text-black"
+      />
 
       <form onSubmit={handleSubmit} className="mb-4 flex gap-2">
         <input
@@ -76,6 +90,7 @@ const Tablelist = () => {
         />
         <button
           type="submit"
+          id="button"
           className="bg-yellow-400 text-black font-bold px-4 py-2 rounded"
         >
           {editingId !== null ? "Actualizar" : "Agregar"}
@@ -85,21 +100,21 @@ const Tablelist = () => {
       <table className="w-full">
         <thead>
           <tr className="bg-yellow-400">
-            <th className="p-2 ">ID</th>
-            <th className="p-2 ">Tarea</th>
-            <th className="p-2 ">Completada</th>
-            <th className="p-2 ">Acciones</th>
+            <th className="p-2">ID</th>
+            <th className="p-2">Tarea</th>
+            <th className="p-2">Completada</th>
+            <th className="p-2">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task) => (
-            <tr key={task.id} className="text-center ">
+          {filteredTasks.map((task) => (
+            <tr key={task.id} className={`text-center text-green-600`}>
               <td className="p-2 text-white">{task.id}</td>
               <td className="p-2 text-white">{task.title}</td>
-              <td className="p-2 ">
+              <td className="p-2">
                 <input
-                  className="checked:text-yellow-40 after:checked: text-black"
                   type="checkbox"
+                  className="accent-yellow-400"
                   checked={task.completed}
                   onChange={() => toggleComplete(task.id)}
                 />
